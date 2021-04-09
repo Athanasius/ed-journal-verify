@@ -1,77 +1,170 @@
 """Given a directory or set of files, scan and report any unknown Journal events."""
 import argparse
+import json
 import logging
+import os
 import pathlib
-import sys
+import re
+import yaml
 from enum import Enum
 
 APPNAME = 'scan-journals'
+CONFIG_FILE = 'scan-journals.yml'
 
 
 class ErrorCodes(Enum):
     OK = 0
     BAD_LOGLEVEL = 1
     NOT_DIR_OR_FILE = 2
+    BAD_CONFIG_FILE = 3
+    NO_FILES = 4
 
-def main() -> None:
-    parser = argparse.ArgumentParser(
-        prog=APPNAME,
-        description='Scan directories and files for Elite Dangerous Journal files '
-                    'and report on any unknown events found.'
-    )
+class JournalScan:
+    """Scan journals."""
 
-    parser.add_argument(
-        '--loglevel',
-        help='Set the log level to one of: '
-             'CRITICAL, ERROR, WARNING, INFO, DEBUG'
-    )
+    config = None
+    logger = None
+    _RE_ED_JOURNAL = re.compile(r'^Journal(Alpha|Beta)?\.[0-9]{12}\.[0-9]{2}\.log$')
+    unknown_events = {}
 
-    parser.add_argument(
-        '--errorcodes',
-        action='store_true',
-        help='Print a list of the exit error codes'
-    )
+    def __init__(self):
+        """Perform initial setup."""
+        self.parser = argparse.ArgumentParser(
+            prog=APPNAME,
+            description='Scan directories and files for Elite Dangerous Journal files '
+                        'and report on any unknown events found.'
+        )
 
-    parser.add_argument(
-        'files',
-        help='Directories and files to be scanned',
-        nargs='*'
-    )
+        self.parser.add_argument(
+            '--loglevel',
+            help='Set the log level to one of: '
+                 'CRITICAL, ERROR, WARNING, INFO, DEBUG'
+        )
 
-    args = parser.parse_args()
+        self.parser.add_argument(
+            '--errorcodes',
+            action='store_true',
+            help='Print a list of the exit error codes'
+        )
 
-    if args.errorcodes:
-        for e in ErrorCodes.__members__.values():
-            print(f'{e.name:30} {e.value}')
+        self.parser.add_argument(
+            '--print-new-config',
+            action='store_true',
+            help='Print out what the new config would be with the new unknowns'
+        )
 
-        exit(0)
+        self.parser.add_argument(
+            'files',
+            help='Directories and files to be scanned',
+            nargs='*'
+        )
 
-    logger = logging.getLogger(APPNAME)
-    if args.loglevel:
-        try:
-            logger.setLevel(args.loglevel)
+        self.args = self.parser.parse_args()
 
-        except ValueError:
-            print(f'Unknown loglevel: {args.loglevel}')
-            parser.print_help()
-            exit(ErrorCodes.BAD_LOGLEVEL.value)
+        if self.args.errorcodes:
+            for e in ErrorCodes.__members__.values():
+                print(f'{e.name:30} {e.value}')
 
-    else:
-        logger.setLevel(logging.INFO)
+            exit(ErrorCodes.OK.value)
 
-    for f in args.files:
-        file = pathlib.Path(f)
-        if file.is_dir():
-            pass
+        self.logger = logging.getLogger(APPNAME)
+        self.logger_ch = logging.StreamHandler()
+        self.logger_formatter = logging.Formatter('%(asctime)s;%(name)s;%(levelname)s;%(module)s.%(funcName)s: %(message)s')
+        self.logger_formatter.default_time_format = '%Y-%m-%d %H:%M:%S';
+        self.logger_formatter.default_msec_format = '%s.%03d'
+        self.logger_ch.setFormatter(self.logger_formatter)
+        self.logger.addHandler(self.logger_ch)
+        if self.args.loglevel:
+            try:
+                self.logger.setLevel(self.args.loglevel)
 
-        elif file.is_file():
-            pass
+            except ValueError:
+                print(f'Unknown loglevel: {self.args.loglevel}')
+                self.parser.print_help()
+                exit(ErrorCodes.BAD_LOGLEVEL.value)
 
         else:
-            logger.error(f'"{file} is not a directory or plain file')
-            exit(ErrorCodes.NOT_DIR_OR_FILE.value)
+            self.logger.setLevel(logging.INFO)
+
+        with open(CONFIG_FILE, 'r') as config_file:
+            self.config = yaml.safe_load(config_file)
+
+        if len(self.args.files) == 0:
+            self.logger.error('You must specify at least one file or directory')
+            self.parser.print_help()
+            exit(ErrorCodes.NO_FILES.value)
+
+    def scan_files(self):
+        """Perform scan of all specified files."""
+        for f in self.args.files:
+            file = pathlib.Path(f)
+            file = file.expanduser()
+            self.process_file(file)
+
+    def process_file(self, file):
+        """Process a directory or single file."""
+        if file.is_dir():
+            for e in file.iterdir():
+                self.process_file(e)
+
+            return
+
+        if file.is_file():
+            if self._RE_ED_JOURNAL.search(file.name):
+                self.scan_file(file)
+
+            else:
+                self.logger.info(f'Skipping non-Journal file: "{file}"')
+
+            return
+
+        self.logger.error(f'Not a directory or plain file: "{file}"')
+        return
+
+
+    def scan_file(self, file):
+        """Scan a file for unknown events."""
+        self.logger.debug(f'Processing "{file}"')
+        with file.open('r', encoding='utf-8') as f:
+            for l in f:
+                entry = json.loads(l)
+                # self.logger.debug(entry)
+                if entry['event'] not in self.config.get('known_events'):
+                    if not self.unknown_events.get(entry['event']):
+                        self.logger.debug(f'Unknown event "{entry["event"]}"')
+
+                        self.unknown_events[entry['event']] = {
+                            'first_file': str(file),
+                            'name': entry['event'],
+                            'count': 1
+                        }
+
+                    else:
+                        self.unknown_events[entry['event']]['count'] += 1
+
+    def report_unknown_events(self):
+        """Report the unknown events."""
+        for u in sorted(self.unknown_events):
+            print(f'{self.unknown_events[u]["name"]:40}{self.unknown_events[u]["count"]}')
+
+    def print_new_config(self):
+        """Print out what the new config file should be."""
+        # Merge the config list with the found unknowns.
+        output = {}
+        output['known_events'] = sorted(self.config.get('known_events') + list(self.unknown_events))
+        print(
+            yaml.safe_dump(
+                output,
+                indent=4,
+            )
+        )
 
 
 if __name__ == '__main__':
-    main()
+    scanner = JournalScan()
+    scanner.scan_files()
+    scanner.report_unknown_events()
+    if scanner.args.print_new_config:
+        scanner.print_new_config()
+
     exit(ErrorCodes.OK.value)
