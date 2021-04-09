@@ -54,6 +54,12 @@ class JournalScan:
         )
 
         self.parser.add_argument(
+            '--print-counts',
+            action='store_true',
+            help='Print counts on the output of unknown event names'
+        )
+
+        self.parser.add_argument(
             'files',
             help='Directories and files to be scanned',
             nargs='*'
@@ -88,6 +94,10 @@ class JournalScan:
 
         with open(CONFIG_FILE, 'r') as config_file:
             self.config = yaml.safe_load(config_file)
+
+        # Empty file means no data, but we need an empty list later.
+        if self.config is None:
+            self.config = {'known_events': []}
 
         if len(self.args.files) == 0:
             self.logger.error('You must specify at least one file or directory')
@@ -145,13 +155,18 @@ class JournalScan:
     def report_unknown_events(self):
         """Report the unknown events."""
         for u in sorted(self.unknown_events):
-            print(f'{self.unknown_events[u]["name"]:40}{self.unknown_events[u]["count"]}')
+            if self.args.print_counts:
+                print(f'{self.unknown_events[u]["name"]:40}{self.unknown_events[u]["count"]}')
+
+            else:
+                print(f'{self.unknown_events[u]["name"]}')
 
     def print_new_config(self):
         """Print out what the new config file should be."""
         # Merge the config list with the found unknowns.
         output = {}
         output['known_events'] = sorted(self.config.get('known_events') + list(self.unknown_events))
+
         print(
             yaml.safe_dump(
                 output,
@@ -163,8 +178,10 @@ class JournalScan:
 if __name__ == '__main__':
     scanner = JournalScan()
     scanner.scan_files()
-    scanner.report_unknown_events()
     if scanner.args.print_new_config:
         scanner.print_new_config()
+
+    else:
+        scanner.report_unknown_events()
 
     exit(ErrorCodes.OK.value)
