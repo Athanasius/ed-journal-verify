@@ -17,6 +17,8 @@ SCHEMAS_DIR = 'journal-schemas'
 
 
 class ErrorCodes(Enum):
+    """Exit codes this program uses to indicate an error."""
+
     OK = 0
     BAD_LOGLEVEL = 1
     NOT_DIR_OR_FILE = 2
@@ -33,7 +35,7 @@ class JournalSchemaCheck:
     _RE_ED_JOURNAL = re.compile(r'^Journal(Alpha|Beta)?\.[0-9]{12}\.[0-9]{2}\.log$')
     unknown_events = {}
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Perform initial setup."""
         self.parser = argparse.ArgumentParser(
             prog=APPNAME,
@@ -112,14 +114,14 @@ class JournalSchemaCheck:
         # Dict, keyed on event name, to hold the loaded schemas
         self.schemas = {}
 
-    def scan_files(self):
+    def scan_files(self) -> None:
         """Perform scan of all specified files."""
         for f in self.args.files:
             file = pathlib.Path(f)
             file = file.expanduser()
             self.process_file(file)
 
-    def process_file(self, file):
+    def process_file(self, file) -> None:
         """Process a directory or single file."""
         if file.is_dir():
             for e in file.iterdir():
@@ -139,7 +141,7 @@ class JournalSchemaCheck:
         self.logger.error(f'Not a directory or plain file: "{file}"')
         return
 
-    def scan_file(self, file):
+    def scan_file(self, file) -> None:
         """Check a file against schema."""
         self.logger.debug(f'Processing "{file}"')
         with file.open('r', encoding='utf-8') as f:
@@ -150,14 +152,14 @@ class JournalSchemaCheck:
                     entry = json.loads(line)
 
                 except json.decoder.JSONDecodeError as e:
-                    self.logger.exception(f'Line:\n{line}')
+                    self.logger.exception(f'Line:\n{line}\n{e!r}')
                     continue
 
                 self.logger.debug(f'entry:\n{entry}')
 
                 event = entry.get('event')
                 if event is None:
-                    logger.error(f"Entry doesn't contain 'event' key:\n{line}")
+                    self.logger.error(f"Entry doesn't contain 'event' key:\n{line}")
                     continue
 
                 # Load schema
@@ -166,8 +168,9 @@ class JournalSchemaCheck:
                         with (pathlib.Path(sys.path[0]) / SCHEMAS_DIR / f'{entry["event"]}.json').open('r') as s:
                             self.schemas[event] = json.load(s)
 
-                    except FileNotFoundError as e:
-                        logger.warning(f"No schema for event type '{event}', can't validate message:\n{line}")
+                    except FileNotFoundError:
+                        self.logger.warning(f"No schema file for event type '{event}', "
+                                            f"can't validate message:\n{line}")
                         continue
 
                 # Validate
@@ -177,7 +180,7 @@ class JournalSchemaCheck:
                 except jsonschema.ValidationError as e:
                     self.logger.error(f'The following entry in file "{file}" failed validation:\n{e}\n{entry}')
 
-                except jsonschema.SchemaError:
+                except jsonschema.SchemaError as e:
                     self.logger.error(f'The following entry in file "{file}" has a schema error:\n{e}\n{entry}')
 
 
