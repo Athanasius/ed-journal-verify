@@ -1,0 +1,27 @@
+{
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "timestamp": {
+            "type":             "string",
+            "format":           "date-time"
+        },
+        "event": {
+            "type":             "string",
+            "const":            "SquadronStartup"
+        },
+        "SquadronName": {
+            "type":             "string",
+            "minlength":        1
+        },
+        "CurrentRank": {
+            "type":             "integer"
+        }
+    },
+    "required": [
+        "timestamp",
+        "event",
+        "SquadronName",
+        "CurrentRank"
+    ]
+}
