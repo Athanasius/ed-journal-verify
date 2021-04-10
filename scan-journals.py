@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """Given a directory or set of files, scan and report any unknown Journal events."""
 import argparse
 import json
@@ -5,6 +6,7 @@ import logging
 import os
 import pathlib
 import re
+import sys
 import yaml
 from enum import Enum
 
@@ -92,7 +94,7 @@ class JournalScan:
         else:
             self.logger.setLevel(logging.INFO)
 
-        with open(CONFIG_FILE, 'r') as config_file:
+        with (pathlib.Path(sys.argv[0]).parent / CONFIG_FILE).open('r') as config_file:
             self.config = yaml.safe_load(config_file)
 
         # Empty file means no data, but we need an empty list later.
