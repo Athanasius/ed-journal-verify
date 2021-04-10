@@ -3,24 +3,27 @@
 import argparse
 import json
 import logging
-import os
 import pathlib
 import re
 import sys
-import yaml
 from enum import Enum
+
+import yaml
 
 APPNAME = 'find-new-events'
 CONFIG_FILE = 'find-new-events.yml'
 
 
 class ErrorCodes(Enum):
+    """Exit codes this program uses to indicate an error."""
+
     OK = 0
     BAD_LOGLEVEL = 1
     NOT_DIR_OR_FILE = 2
     BAD_CONFIG_FILE = 3
     NO_FILES = 4
     CONFIG_FILE_NOT_FOUND = 5
+
 
 class JournalScan:
     """Scan journals."""
@@ -30,7 +33,7 @@ class JournalScan:
     _RE_ED_JOURNAL = re.compile(r'^Journal(Alpha|Beta)?\.[0-9]{12}\.[0-9]{2}\.log$')
     unknown_events = {}
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Perform initial setup."""
         self.parser = argparse.ArgumentParser(
             prog=APPNAME,
@@ -84,7 +87,7 @@ class JournalScan:
         self.logger = logging.getLogger(APPNAME)
         self.logger_ch = logging.StreamHandler()
         self.logger_formatter = logging.Formatter('%(asctime)s - %(levelname)8s - %(module)s:%(lineno)d: %(message)s')
-        self.logger_formatter.default_time_format = '%Y-%m-%d %H:%M:%S';
+        self.logger_formatter.default_time_format = '%Y-%m-%d %H:%M:%S'
         self.logger_formatter.default_msec_format = '%s.%03d'
         self.logger_ch.setFormatter(self.logger_formatter)
         self.logger.addHandler(self.logger_ch)
@@ -122,14 +125,14 @@ class JournalScan:
             self.parser.print_help()
             exit(ErrorCodes.NO_FILES.value)
 
-    def scan_files(self):
+    def scan_files(self) -> None:
         """Perform scan of all specified files."""
         for f in self.args.files:
             file = pathlib.Path(f)
             file = file.expanduser()
             self.process_file(file)
 
-    def process_file(self, file):
+    def process_file(self, file) -> None:
         """Process a directory or single file."""
         if file.is_dir():
             for e in file.iterdir():
@@ -149,19 +152,18 @@ class JournalScan:
         self.logger.error(f'Not a directory or plain file: "{file}"')
         return
 
-
-    def scan_file(self, file):
+    def scan_file(self, file) -> None:
         """Scan a file for unknown events."""
         self.logger.debug(f'Processing "{file}"')
         with file.open('r', encoding='utf-8') as f:
             lineno = 0
-            for l in f:
+            for line in f:
                 lineno += 1
                 try:
-                    entry = json.loads(l)
+                    entry = json.loads(line)
 
                 except json.decoder.JSONDecodeError as e:
-                    self.logger.exception(f'Line:\n{l}')
+                    self.logger.exception(f'Line:\n{line}\n{e!r}')
                     continue
 
                 # self.logger.debug(entry)
@@ -169,7 +171,7 @@ class JournalScan:
                     if event not in self.config.get('known_events'):
                         if not self.unknown_events.get(event):
                             self.logger.debug(f'Unknown event "{event}" on '
-                                              f'line {lineno}:\n{l}')
+                                              f'line {lineno}:\n{line}')
 
                             self.unknown_events[entry['event']] = {
                                 'first_file': str(file),
@@ -180,9 +182,9 @@ class JournalScan:
                         else:
                             self.unknown_events[event]['count'] += 1
                 else:
-                    self.logger.error(f'No "event" key:\n{l}')
+                    self.logger.error(f'No "event" key:\n{line}')
 
-    def report_unknown_events(self):
+    def report_unknown_events(self) -> None:
         """Report the unknown events."""
         for u in sorted(self.unknown_events):
             if self.args.print_counts:
@@ -191,7 +193,7 @@ class JournalScan:
             else:
                 print(f'{self.unknown_events[u]["name"]}')
 
-    def print_new_config(self):
+    def print_new_config(self) -> None:
         """Print out what the new config file should be."""
         # Merge the config list with the found unknowns.
         output = {}
