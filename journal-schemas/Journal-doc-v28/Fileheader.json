@@ -26,5 +26,13 @@
             "type":             "string",
 	    "minLength":	1
         }
-    }
+    },
+    "required": [
+        "timestamp",
+        "event",
+        "part",
+        "language",
+        "gameversion",
+        "build"
+    ]
 }

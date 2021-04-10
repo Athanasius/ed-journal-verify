@@ -19,5 +19,12 @@
         "Encoded": {
             "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Array_of_Name-Count.json"
         }
-    }
+    },
+    "required": [
+        "timestamp",
+        "event",
+        "Raw",
+        "Manufactured",
+        "Encoded"
+    ]
 }

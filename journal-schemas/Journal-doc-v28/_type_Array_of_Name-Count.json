@@ -18,6 +18,10 @@
                 "type":         "integer",
                 "minimum":      1
             }
-        }
+        },
+        "required": [
+            "Name",
+            "Count"
+        ]
     }
 }
