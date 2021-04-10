@@ -160,7 +160,7 @@ class JournalSchemaCheck:
         self.logger.error(f'Not a directory or plain file: "{file}"')
         return
 
-    def scan_file(self, file) -> None:
+    def scan_file(self, file) -> None:  # noqa: CCR001
         """Check a file against schema."""
         self.logger.debug(f'Processing "{file}"')
         with file.open('r', encoding='utf-8') as f:
@@ -185,7 +185,12 @@ class JournalSchemaCheck:
                 if self.schemas.get('event') is None:
                     try:
                         with (pathlib.Path(sys.path[0]) / self.schemas_dir / f'{entry["event"]}.json').open('r') as s:
-                            self.schemas[event] = json.load(s)
+                            try:
+                                self.schemas[event] = json.load(s)
+
+                            except json.decoder.JSONDecodeError as e:
+                                self.logger.error(f"Error loading schema file for event '{event}':\n{e!r}")
+                                continue
 
                     except FileNotFoundError:
                         self.logger.warning(f"No schema file for event type '{event}', "
