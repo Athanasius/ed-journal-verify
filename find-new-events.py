@@ -162,7 +162,7 @@ class JournalScan:
 
                 except json.decoder.JSONDecodeError as e:
                     self.logger.exception(f'Line:\n{l}')
-                    next
+                    continue
 
                 # self.logger.debug(entry)
                 if (event := entry.get('event')) is not None:
