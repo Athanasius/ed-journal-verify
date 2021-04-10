@@ -77,7 +77,7 @@ class JournalScan:
 
         self.logger = logging.getLogger(APPNAME)
         self.logger_ch = logging.StreamHandler()
-        self.logger_formatter = logging.Formatter('%(asctime)s;%(name)s;%(levelname)s;%(module)s.%(funcName)s: %(message)s')
+        self.logger_formatter = logging.Formatter('%(asctime)s - %(levelname)8s - %(module)s:%(lineno)d: %(message)s')
         self.logger_formatter.default_time_format = '%Y-%m-%d %H:%M:%S';
         self.logger_formatter.default_msec_format = '%s.%03d'
         self.logger_ch.setFormatter(self.logger_formatter)
@@ -138,7 +138,9 @@ class JournalScan:
         """Scan a file for unknown events."""
         self.logger.debug(f'Processing "{file}"')
         with file.open('r', encoding='utf-8') as f:
+            lineno = 0
             for l in f:
+                lineno += 1
                 try:
                     entry = json.loads(l)
 
@@ -147,10 +149,11 @@ class JournalScan:
                     next
 
                 # self.logger.debug(entry)
-                if event := entry.get('event'):
+                if (event := entry.get('event')) is not None:
                     if event not in self.config.get('known_events'):
                         if not self.unknown_events.get(event):
-                            self.logger.debug(f'Unknown event "{event}"')
+                            self.logger.debug(f'Unknown event "{event}" on '
+                                              f'line {lineno}:\n{l}')
 
                             self.unknown_events[entry['event']] = {
                                 'first_file': str(file),
