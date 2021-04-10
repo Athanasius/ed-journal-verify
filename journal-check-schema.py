@@ -3,15 +3,17 @@
 import argparse
 import json
 import logging
-import os
 import pathlib
 import re
 import sys
-import yaml
 from enum import Enum
 
+import jsonschema
+import yaml
+
 APPNAME = 'journal-check-schema'
-# CONFIG_FILE = 'find-new-events.yml'
+CONFIG_FILE = 'journal-check-schema.yml'
+SCHEMAS_DIR = 'journal-schemas'
 
 
 class ErrorCodes(Enum):
@@ -21,6 +23,7 @@ class ErrorCodes(Enum):
     BAD_CONFIG_FILE = 3
     NO_FILES = 4
     CONFIG_FILE_NOT_FOUND = 5
+
 
 class JournalSchemaCheck:
     """Scan journals."""
@@ -72,7 +75,7 @@ class JournalSchemaCheck:
         self.logger = logging.getLogger(APPNAME)
         self.logger_ch = logging.StreamHandler()
         self.logger_formatter = logging.Formatter('%(asctime)s - %(levelname)8s - %(module)s:%(lineno)d: %(message)s')
-        self.logger_formatter.default_time_format = '%Y-%m-%d %H:%M:%S';
+        self.logger_formatter.default_time_format = '%Y-%m-%d %H:%M:%S'
         self.logger_formatter.default_msec_format = '%s.%03d'
         self.logger_ch.setFormatter(self.logger_formatter)
         self.logger.addHandler(self.logger_ch)
@@ -106,6 +109,9 @@ class JournalSchemaCheck:
             self.parser.print_help()
             exit(ErrorCodes.NO_FILES.value)
 
+        # Dict, keyed on event name, to hold the loaded schemas
+        self.schemas = {}
+
     def scan_files(self):
         """Perform scan of all specified files."""
         for f in self.args.files:
@@ -133,23 +139,46 @@ class JournalSchemaCheck:
         self.logger.error(f'Not a directory or plain file: "{file}"')
         return
 
-
     def scan_file(self, file):
         """Check a file against schema."""
         self.logger.debug(f'Processing "{file}"')
         with file.open('r', encoding='utf-8') as f:
             lineno = 0
-            for l in f:
+            for line in f:
                 lineno += 1
                 try:
-                    entry = json.loads(l)
+                    entry = json.loads(line)
 
                 except json.decoder.JSONDecodeError as e:
-                    self.logger.exception(f'Line:\n{l}')
-                    next
+                    self.logger.exception(f'Line:\n{line}')
+                    continue
 
                 self.logger.debug(f'entry:\n{entry}')
+
+                event = entry.get('event')
+                if event is None:
+                    logger.error(f"Entry doesn't contain 'event' key:\n{line}")
+                    continue
+
+                # Load schema
+                if self.schemas.get('event') is None:
+                    try:
+                        with (pathlib.Path(sys.path[0]) / SCHEMAS_DIR / f'{entry["event"]}.json').open('r') as s:
+                            self.schemas[event] = json.load(s)
+
+                    except FileNotFoundError as e:
+                        logger.warning(f"No schema for event type '{event}', can't validate message:\n{line}")
+                        continue
+
                 # Validate
+                try:
+                    jsonschema.validate(entry, self.schemas[event])
+
+                except jsonschema.ValidationError as e:
+                    self.logger.error(f'The following entry in file "{file}" failed validation:\n{e}\n{entry}')
+
+                except jsonschema.SchemaError:
+                    self.logger.error(f'The following entry in file "{file}" has a schema error:\n{e}\n{entry}')
 
 
 if __name__ == '__main__':

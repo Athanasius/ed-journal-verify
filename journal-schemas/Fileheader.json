@@ -1,0 +1,26 @@
+{
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "timestamp": {
+            "type":             "string",
+            "format":           "date-time"
+        },
+        "event": {
+            "type":             "string",
+            "enum":             [ "Fileheader" ]
+        },
+        "part": {
+            "type":             "integer"
+        },
+        "language": {
+            "type":             "string"
+        },
+        "gameversion": {
+            "type":             "string"
+        },
+        "build": {
+            "type":             "string"
+        }
+    }
+}
