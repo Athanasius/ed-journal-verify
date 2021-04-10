@@ -1,0 +1,9 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "_type_Commander_Reputation",
+    "title": "Frontier Developers Elite Dangerous Journal Commander's Major Reputation ",
+    "description": "An object describing a Commander's Major Reputation.",
+    "type":         "number",
+    "minimum":      -100.0,
+    "maximum":      100.0
+}
