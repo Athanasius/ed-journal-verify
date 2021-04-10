@@ -7,6 +7,7 @@ import pathlib
 import re
 import sys
 from enum import Enum
+from typing import Dict, Union
 
 import yaml
 
@@ -28,10 +29,8 @@ class ErrorCodes(Enum):
 class JournalScan:
     """Scan journals."""
 
-    config = None
-    logger = None
     _RE_ED_JOURNAL = re.compile(r'^Journal(Alpha|Beta)?\.[0-9]{12}\.[0-9]{2}\.log$')
-    unknown_events = {}
+    unknown_events: Dict[str, Dict[str, Union[str, int]]] = {}
 
     def __init__(self) -> None:
         """Perform initial setup."""
@@ -169,7 +168,7 @@ class JournalScan:
                 # self.logger.debug(entry)
                 if (event := entry.get('event')) is not None:
                     if event not in self.config.get('known_events'):
-                        if not self.unknown_events.get(event):
+                        if self.unknown_events.get(event) is None:
                             self.logger.debug(f'Unknown event "{event}" on '
                                               f'line {lineno}:\n{line}')
 
@@ -180,7 +179,8 @@ class JournalScan:
                             }
 
                         else:
-                            self.unknown_events[event]['count'] += 1
+                            self.unknown_events[event]['count'] += 1  # type: ignore
+
                 else:
                     self.logger.error(f'No "event" key:\n{line}')
 
