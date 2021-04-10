@@ -1,0 +1,89 @@
+{
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "timestamp": {
+            "type":             "string",
+            "format":           "date-time"
+        },
+        "event": {
+            "type":             "string",
+            "const":            "Commander"
+        },
+        "Commander": {
+            "type":             "string",
+            "minLength":        1
+        },
+        "FID": {
+            "type":             "string",
+            "minLength":        1
+        },
+        "Horizons": {
+            "type":             "boolean"
+        },
+        "Ship": {
+            "type":             "string",
+            "minLength":        1
+        },
+        "ShipID": {
+            "type":             "integer",
+            "minimum":          0
+        },
+        "StartLanded": {
+            "type":             "boolean"
+        },
+        "StartDead": {
+            "type":             "boolean"
+        },
+        "GameMode": {
+            "type":             "string",
+            "enum": [
+                "Open",
+                "Solo",
+                "Group"
+            ]
+        },
+        "Group": {
+            "type":             "string",
+            "minLength":        1
+        },
+        "Credits": {
+            "type":             "integer",
+            "minimum":          0
+        },
+        "Loan": {
+            "type":             "integer",
+            "minimum":          0
+        },
+        "ShipName": {
+            "type":             "string",
+            "minLength":        1
+        },
+        "ShipIdent": {
+            "type":             "string",
+            "minLength":        1
+        },
+        "FuelLevel": {
+            "type":             "number",
+            "minimum":          0.00
+        },
+        "FuelCapacity": {
+            "type":             "number",
+            "minimum":          0.00
+        }
+    },
+    "required": [
+        "Commander",
+        "FID",
+        "Horizons",
+        "Ship",
+        "ShipID",
+        "GameMode",
+        "Credits",
+        "Loan",
+        "ShipName",
+        "ShipIdent",
+        "FuelLevel",
+        "FuelCapacity"
+    ]
+}
