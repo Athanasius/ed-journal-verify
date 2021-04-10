@@ -3,6 +3,7 @@
 import argparse
 import json
 import logging
+import os
 import pathlib
 import re
 import sys
@@ -132,6 +133,10 @@ class JournalSchemaCheck:
             self.logger.error('You must specify at least one file or directory\n')
             self.parser.print_help()
             exit(ErrorCodes.NO_FILES.value)
+
+        # JSON schemas referencing others is by relative path, so we'll have to
+        # ensure CWD is in an expected place.
+        os.chdir(pathlib.Path(sys.argv[0]).parent)
 
     def scan_files(self) -> None:
         """Perform scan of all specified files."""
