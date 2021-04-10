@@ -139,7 +139,13 @@ class JournalScan:
         self.logger.debug(f'Processing "{file}"')
         with file.open('r', encoding='utf-8') as f:
             for l in f:
-                entry = json.loads(l)
+                try:
+                    entry = json.loads(l)
+
+                except json.decoder.JSONDecodeError as e:
+                    logger.exception(f'Line:\n{l}')
+                    next
+
                 # self.logger.debug(entry)
                 if entry['event'] not in self.config.get('known_events'):
                     if not self.unknown_events.get(entry['event']):
