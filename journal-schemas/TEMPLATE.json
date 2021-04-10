@@ -10,5 +10,9 @@
             "type":             "string",
             "const":            "EVENTNAME"
         }
-    }
+    },
+    "required": [
+        "timestamp",
+        "event",
+    ]
 }
