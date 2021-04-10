@@ -14,7 +14,7 @@ import yaml
 
 APPNAME = 'journal-check-schema'
 CONFIG_FILE = 'journal-check-schema.yml'
-SCHEMAS_DIR = 'journal-schemas'
+SCHEMAS_DIR = 'journal-schemas/Journal-doc-v28'  # Default Journal schemas
 
 
 class ErrorCodes(Enum):
@@ -26,6 +26,7 @@ class ErrorCodes(Enum):
     BAD_CONFIG_FILE = 3
     NO_FILES = 4
     CONFIG_FILE_NOT_FOUND = 5
+    SCHEMAS_DIR_NOT_EXIST = 6
 
 
 class JournalSchemaCheck:
@@ -51,6 +52,11 @@ class JournalSchemaCheck:
         self.parser.add_argument(
             '--config',
             help='Specify an alternative config file'
+        )
+
+        self. parser.add_argument(
+            '--schemas',
+            help='Specify a directory holding per-event schema files'
         )
 
         self.parser.add_argument(
@@ -85,7 +91,7 @@ class JournalSchemaCheck:
                 self.logger.setLevel(self.args.loglevel)
 
             except ValueError:
-                print(f'Unknown loglevel: {self.args.loglevel}')
+                print(f'Unknown loglevel: {self.args.loglevel}\n')
                 self.parser.print_help()
                 exit(ErrorCodes.BAD_LOGLEVEL.value)
 
@@ -105,13 +111,24 @@ class JournalSchemaCheck:
             print(f'Bad config file "{config_file}": {e!r}')
             exit(ErrorCodes.CONFIG_FILE_NOT_FOUND.value)
 
-        if len(self.args.files) == 0:
-            self.logger.error('You must specify at least one file or directory')
+        if self.args.schemas:
+            self.schemas_dir = pathlib.Path(self.args.schemas)
+
+        else:
+            self.schemas_dir = pathlib.Path(SCHEMAS_DIR)
+
+        if not self.schemas_dir.exists():
+            print(f'Specified schemas directory "{self.schemas_dir}" does not exist\n')
             self.parser.print_help()
-            exit(ErrorCodes.NO_FILES.value)
+            exit(ErrorCodes.SCHEMAS_DIR_NOT_EXIST.value)
 
         # Dict, keyed on event name, to hold the loaded schemas
         self.schemas: Dict = {}
+
+        if len(self.args.files) == 0:
+            self.logger.error('You must specify at least one file or directory\n')
+            self.parser.print_help()
+            exit(ErrorCodes.NO_FILES.value)
 
     def scan_files(self) -> None:
         """Perform scan of all specified files."""
@@ -164,7 +181,7 @@ class JournalSchemaCheck:
                 # Load schema
                 if self.schemas.get('event') is None:
                     try:
-                        with (pathlib.Path(sys.path[0]) / SCHEMAS_DIR / f'{entry["event"]}.json').open('r') as s:
+                        with (pathlib.Path(sys.path[0]) / self.schemas_dir / f'{entry["event"]}.json').open('r') as s:
                             self.schemas[event] = json.load(s)
 
                     except FileNotFoundError:
