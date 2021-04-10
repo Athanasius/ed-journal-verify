@@ -1,0 +1,32 @@
+{
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "timestamp": {
+            "type":             "string",
+            "format":           "date-time"
+        },
+        "event": {
+            "type":             "string",
+            "const":            "EVENTNAME"
+        },
+        "From": {
+            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Commander_Name.json"
+        },
+        "Message": {
+            "type":             "string",
+            "minLength":        1
+        },
+        "Channel": {
+            "type":             "string",
+            "minLength":        1
+        }
+    },
+    "required": [
+        "timestamp",
+        "event",
+        "From",
+        "Message",
+        "Channel"
+    ]
+}
