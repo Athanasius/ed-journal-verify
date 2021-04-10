@@ -114,6 +114,9 @@ class JournalSchemaCheck:
         if self.args.schemas:
             self.schemas_dir = pathlib.Path(self.args.schemas)
 
+        elif (s_dir := self.config.get('schemas_dir')) is not None:
+            self.schemas_dir = pathlib.Path(s_dir)
+
         else:
             self.schemas_dir = pathlib.Path(SCHEMAS_DIR)
 
