@@ -1,0 +1,22 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "_type_Array_of_Name-Count",
+    "title": "Frontier Developers Elite Dangerous Journal Materials array schema",
+    "description": "An array of objects containing Name and Count.",
+    "type": "array",
+    "minItems":         1,
+    "uniqueItems":      true,
+    "contains": {
+        "type":         "object",
+        "properties": {
+            "Name": {
+                "type":         "string",
+                "minLength":    1
+            },
+            "Count": {
+                "type":         "integer",
+                "minimum":      1
+            }
+        }
+    }
+}
