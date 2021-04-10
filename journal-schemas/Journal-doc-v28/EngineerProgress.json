@@ -1,0 +1,56 @@
+{
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "timestamp": {
+            "type":             "string",
+            "format":           "date-time"
+        },
+        "event": {
+            "type":             "string",
+            "const":            "EngineerProgress"
+        },
+        "Engineers": {
+            "type":             "array",
+            "uniqyeItems":      true,
+            "contains": {
+                "type":                     "object",
+                "additionalProperties":     false,
+                "properties": {
+                    "Engineer": {
+                        "type":             "string",
+                        "minLength":        1
+                    },
+                    "EngineerID": {
+                        "type":             "integer"
+                    },
+                    "Progress": {
+                        "type":             "string",
+                        "enum": [
+                            "Invited",
+                            "Acquainted",
+                            "Unlocked",
+                            "Barred"
+                        ]
+                    },
+                    "Rank": {
+                        "type":             "integer",
+                        "minimum":          1,
+                        "maximum":          5
+                    }
+                },
+                "required": [
+                    "Engineer",
+                    "EngineerID",
+                    "Progress"
+                ]
+            }
+
+        }
+    },
+    "required": [
+        "timestamp",
+        "event",
+        "Engineers"
+    ]
+}
