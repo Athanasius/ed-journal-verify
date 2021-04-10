@@ -1,0 +1,9 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "_type_Commander_Rank_Progress",
+    "title": "Frontier Developers Elite Dangerous Journal Commander Rank Progress",
+    "description": "An object describing a Commander's Rank Progress.",
+    "type":         "integer",
+    "minimum":      0,
+    "maximum":      100
+}
