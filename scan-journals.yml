@@ -15,6 +15,7 @@ known_events:
 - BuySuit
 - BuyTradeData
 - BuyWeapon
+- CancelDropship
 - CancelTaxi
 - CapShipBond
 - Cargo
