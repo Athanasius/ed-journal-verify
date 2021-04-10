@@ -1,0 +1,23 @@
+{
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "timestamp": {
+            "type":             "string",
+            "format":           "date-time"
+        },
+        "event": {
+            "type":             "string",
+            "const":            "Materials"
+        },
+        "Raw": {
+            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Array_of_Name-Count.json"
+        },
+        "Manufactured": {
+            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Array_of_Name-Count.json"
+        },
+        "Encoded": {
+            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Array_of_Name-Count.json"
+        }
+    }
+}
