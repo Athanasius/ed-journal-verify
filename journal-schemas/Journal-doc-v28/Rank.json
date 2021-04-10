@@ -1,0 +1,42 @@
+{
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "timestamp": {
+            "type":             "string",
+            "format":           "date-time"
+        },
+        "event": {
+            "type":             "string",
+            "const":            "Rank"
+        },
+        "Combat": {
+            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Commander_Rank.json"
+        },
+        "Trade": {
+            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Commander_Rank.json"
+        },
+        "Explore": {
+            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Commander_Rank.json"
+        },
+        "Empire": {
+            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Commander_Rank.json"
+        },
+        "Federation": {
+            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Commander_Rank.json"
+        },
+        "CQC": {
+            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Commander_Rank.json"
+        }
+    },
+    "required": [
+        "timestamp",
+        "event",
+        "Combat",
+        "Trade",
+        "Explore",
+        "Empire",
+        "Federation",
+        "CQC"
+    ]
+}
