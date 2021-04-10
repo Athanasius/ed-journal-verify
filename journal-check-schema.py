@@ -7,6 +7,7 @@ import pathlib
 import re
 import sys
 from enum import Enum
+from typing import Dict
 
 import jsonschema
 import yaml
@@ -30,10 +31,8 @@ class ErrorCodes(Enum):
 class JournalSchemaCheck:
     """Scan journals."""
 
-    config = None
-    logger = None
     _RE_ED_JOURNAL = re.compile(r'^Journal(Alpha|Beta)?\.[0-9]{12}\.[0-9]{2}\.log$')
-    unknown_events = {}
+    unknown_events: Dict = {}
 
     def __init__(self) -> None:
         """Perform initial setup."""
@@ -112,7 +111,7 @@ class JournalSchemaCheck:
             exit(ErrorCodes.NO_FILES.value)
 
         # Dict, keyed on event name, to hold the loaded schemas
-        self.schemas = {}
+        self.schemas: Dict = {}
 
     def scan_files(self) -> None:
         """Perform scan of all specified files."""
