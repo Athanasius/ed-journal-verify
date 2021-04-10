@@ -10,8 +10,8 @@ import sys
 import yaml
 from enum import Enum
 
-APPNAME = 'scan-journals'
-CONFIG_FILE = 'scan-journals.yml'
+APPNAME = 'find-new-events'
+CONFIG_FILE = 'find-new-events.yml'
 
 
 class ErrorCodes(Enum):
