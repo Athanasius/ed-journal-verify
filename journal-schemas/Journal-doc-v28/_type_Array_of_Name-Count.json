@@ -8,6 +8,7 @@
     "uniqueItems":      true,
     "contains": {
         "type":         "object",
+        "additionalProperties":     false,
         "properties": {
             "Name": {
                 "type":         "string",
