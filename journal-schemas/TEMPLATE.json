@@ -8,15 +8,7 @@
         },
         "event": {
             "type":             "string",
-            "const":            "Commander"
-        },
-        "FID": {
-            "type":             "string",
-            "minLength":        1
-        },
-        "Name": {
-            "type":             "string",
-            "minLength":        1
+            "const":            "EVENTNAME"
         }
     }
 }

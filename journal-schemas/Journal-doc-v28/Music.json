@@ -10,9 +10,9 @@
             "type":             "string",
             "enum":             [ "Music" ]
         },
-	"MusicTrack": {
+        "MusicTrack": {
             "type":             "string",
-	    "minLength": 	1
-	}
+            "minLength":        1
+        }
     }
 }

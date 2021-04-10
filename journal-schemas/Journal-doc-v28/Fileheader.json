@@ -8,7 +8,7 @@
         },
         "event": {
             "type":             "string",
-            "pattern":          "^Fileheader$"
+            "const":            "Fileheader"
         },
         "part": {
             "type":             "integer",
