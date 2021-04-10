@@ -20,6 +20,7 @@ class ErrorCodes(Enum):
     NOT_DIR_OR_FILE = 2
     BAD_CONFIG_FILE = 3
     NO_FILES = 4
+    CONFIG_FILE_NOT_FOUND = 5
 
 class JournalScan:
     """Scan journals."""
@@ -41,6 +42,11 @@ class JournalScan:
             '--loglevel',
             help='Set the log level to one of: '
                  'CRITICAL, ERROR, WARNING, INFO, DEBUG'
+        )
+
+        self.parser.add_argument(
+            '--config',
+            help='Specify an alternative config file'
         )
 
         self.parser.add_argument(
@@ -94,8 +100,18 @@ class JournalScan:
         else:
             self.logger.setLevel(logging.INFO)
 
-        with (pathlib.Path(sys.argv[0]).parent / CONFIG_FILE).open('r') as config_file:
-            self.config = yaml.safe_load(config_file)
+        if self.args.config:
+            config_file = pathlib.Path(self.args.config).expanduser()
+        else:
+            config_file = (pathlib.Path(sys.argv[0]).parent / CONFIG_FILE).expanduser()
+
+        try:
+            with config_file.open('r') as cf:
+                self.config = yaml.safe_load(cf)
+
+        except FileNotFoundError as e:
+            print(f'Bad config file "{config_file}": {e!r}')
+            exit(ErrorCodes.CONFIG_FILE_NOT_FOUND.value)
 
         # Empty file means no data, but we need an empty list later.
         if self.config is None:
