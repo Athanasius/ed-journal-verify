@@ -8,6 +8,7 @@
         },
         "event": {
             "type":             "string",
-            "enum":             [ "EVENTNAME" ]
+            "pattern":          "^EVENTNAME$"
         }
+    }
 }
