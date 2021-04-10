@@ -143,22 +143,25 @@ class JournalScan:
                     entry = json.loads(l)
 
                 except json.decoder.JSONDecodeError as e:
-                    logger.exception(f'Line:\n{l}')
+                    self.logger.exception(f'Line:\n{l}')
                     next
 
                 # self.logger.debug(entry)
-                if entry['event'] not in self.config.get('known_events'):
-                    if not self.unknown_events.get(entry['event']):
-                        self.logger.debug(f'Unknown event "{entry["event"]}"')
+                if event := entry.get('event'):
+                    if event not in self.config.get('known_events'):
+                        if not self.unknown_events.get(event):
+                            self.logger.debug(f'Unknown event "{event}"')
 
-                        self.unknown_events[entry['event']] = {
-                            'first_file': str(file),
-                            'name': entry['event'],
-                            'count': 1
-                        }
+                            self.unknown_events[entry['event']] = {
+                                'first_file': str(file),
+                                'name': event,
+                                'count': 1
+                            }
 
-                    else:
-                        self.unknown_events[entry['event']]['count'] += 1
+                        else:
+                            self.unknown_events[event]['count'] += 1
+                else:
+                    self.logger.error(f'No "event" key:\n{l}')
 
     def report_unknown_events(self):
         """Report the unknown events."""
