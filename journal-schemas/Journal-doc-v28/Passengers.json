@@ -1,0 +1,25 @@
+{
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "timestamp": {
+            "type":             "string",
+            "format":           "date-time"
+        },
+        "event": {
+            "type":             "string",
+            "const":            "Passengers"
+        },
+        "Manifest": {
+            "type":             "array",
+            "items": {
+                "$ref":         "file:_type_Passenger_Manifest.json"
+            }
+        }
+    },
+    "required": [
+        "timestamp",
+        "event",
+        "Passengers"
+    ]
+}

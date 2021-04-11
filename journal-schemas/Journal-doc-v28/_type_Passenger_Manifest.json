@@ -1,0 +1,33 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "_type_Passenger_Manifest",
+    "title": "Frontier Developers Elite Dangerous Journal Passengers Manifest",
+    "description": "An array of objects containing Passengers Manifest details.",
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "MissionID": {
+            "$ref":             "file:_type_MissionID.json"
+        },
+        "Type": {
+            "type":             "string",
+            "minLength":        1
+        },
+        "VIP": {
+            "type":             "boolean"
+        },
+        "Wanted": {
+            "type":             "boolean"
+        },
+        "Count": {
+            "type":             "integer",
+            "minimum":          1
+        }
+    },
+    "required": [
+        "MissionID",
+        "Name",
+        "PassengerMission",
+        "Expires"
+    ]
+}
