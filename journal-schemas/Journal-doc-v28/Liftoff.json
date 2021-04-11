@@ -1,0 +1,38 @@
+{
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "timestamp": {
+            "type":             "string",
+            "format":           "date-time"
+        },
+        "event": {
+            "type":             "string",
+            "const":            "Liftoff"
+        },
+        "Latitude": {
+            "$ref":             "file:_type_Latitude.json"
+        },
+        "Longitude": {
+            "$ref":             "file:_type_Longitude.json"
+        },
+        "NearestDestination": {
+            "type":             "string",
+            "minLength":        1
+        },
+        "NearestDestination_Localised": {
+            "type":             "string",
+            "minLength":        1
+        },
+        "PlayerControlled": {
+            "type":             "boolean"
+        }
+    },
+    "required": [
+        "timestamp",
+        "event",
+        "NearestDestination",
+        "NearestDestination_Localised",
+        "PlayerControlled"
+    ]
+}

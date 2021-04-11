@@ -1,0 +1,9 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "_type_Longitude",
+    "title": "Frontier Developers Elite Dangerous Journal Longitude",
+    "description": "An object describing a Longitude.",
+    "type":         "number",
+    "minimum":      -180.0,
+    "maximum":      180.0
+}
