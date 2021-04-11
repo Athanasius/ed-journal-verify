@@ -1,0 +1,7 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "_type_SystemAddress",
+    "title": "Frontier Developers Elite Dangerous Journal SystemAddress",
+    "description": "An object describing a SystemAddress.",
+    "type":         "integer"
+}

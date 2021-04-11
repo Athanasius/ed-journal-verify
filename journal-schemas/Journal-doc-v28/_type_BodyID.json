@@ -1,0 +1,8 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "_type_BodyID",
+    "title": "Frontier Developers Elite Dangerous Journal BodyID",
+    "description": "An object describing a BodyID.",
+    "type":         "integer",
+    "minLength":    0
+}
