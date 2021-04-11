@@ -1,0 +1,8 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "_type_StarClass",
+    "title": "Frontier Developers Elite Dangerous Journal StarClass",
+    "description": "A system's main star class.",
+    "type":                     "string",
+    "minLength":                1
+}

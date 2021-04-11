@@ -1,0 +1,35 @@
+{
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "timestamp": {
+            "type":             "string",
+            "format":           "date-time"
+        },
+        "event": {
+            "type":             "string",
+            "const":            "FSDTarget"
+        },
+        "Starsystem": {
+            "$ref":             "file:_type_SystemAddress.json"
+        },
+        "Name": {
+            "$ref":             "file:_type_SystemName.json"
+        },
+        "RemainingJumpsInRoute": {
+            "type":             "integer",
+            "minimum":          1
+        },
+        "StarClass": {
+            "$ref":             "file:_type_StarClass.json"
+        }
+    },
+    "required": [
+        "timestamp",
+        "event",
+        "Starsystem",
+        "Name",
+        "RemainingJumpsInRoute",
+        "StarClass"
+    ]
+}
