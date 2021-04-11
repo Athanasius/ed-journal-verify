@@ -216,7 +216,7 @@ class JournalSchemaCheck:
                             # NB: We need .as_uri() here so it's always forwards slashes, due to how
                             #     the called-into functions expect '/' not '\' in tests.
                             resolver = jsonschema.RefResolver(
-                                base_uri=f'file:{schema_file_path.as_uri()}',
+                                base_uri=schema_file_path.as_uri(),
                                 referrer=schema_json
                             )
                             jsonschema.Draft7Validator.check_schema(schema_json)
