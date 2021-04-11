@@ -8,19 +8,18 @@
         },
         "event": {
             "type":             "string",
-            "const":            "Commander"
-        },
-        "FID": {
-            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_FID.json"
+            "const":            "ClearSavedGame"
         },
         "Name": {
             "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Commander_Name.json"
+        },
+        "FID": {
+            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_FID.json"
         }
     },
     "required": [
         "timestamp",
         "event",
-        "FID",
         "Name"
     ]
 }

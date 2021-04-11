@@ -11,12 +11,10 @@
             "const":            "Commander"
         },
         "Commander": {
-            "type":             "string",
-            "minLength":        1
+            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Commander_Name.json"
         },
         "FID": {
-            "type":             "string",
-            "minLength":        1
+            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_FID.json"
         },
         "Horizons": {
             "type":             "boolean"
