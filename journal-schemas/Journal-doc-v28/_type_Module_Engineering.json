@@ -1,0 +1,74 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "_type_Module_Engineering",
+    "title": "Frontier Developers Elite Dangerous Journal Module Engineering data",
+    "description": "An object describing a Module's Engineering.",
+    "type":         "object",
+    "additionalProperties":     false,
+    "properties": {
+        "EngineerID": {
+            "$ref":             "file:_type_EngineerID.json"
+        },
+        "Engineer": {
+            "$ref":             "file:_type_Engineer_Name.json"
+        },
+        "BlueprintID": {
+            "$ref":             "file:_type_BlueprintID.json"
+        },
+        "BlueprintName": {
+            "$ref":             "file:_type_Blueprint_Name.json"
+        },
+        "Level": {
+            "type":             "integer"
+        },
+        "Quality": {
+            "type":             "number",
+            "minimum":          0.0,
+            "maximum":          1.0
+        },
+        "ExperimentalEffect": {
+            "type":             "string"
+        },
+        "Modifications": {
+            "type":             "array",
+            "contains": {
+                "type":                     "object",
+                "additionalProperties":     false,
+                "properties": {
+                    "Label": {
+                        "type":             "string",
+                        "minLength":        1
+                    },
+                    "Value": {
+                        "type":             "number"
+                    },
+                    "OriginalValue": {
+                        "type":             "number"
+                    },
+                    "LessIsGood": {
+                        "type":             "integer",
+                        "enum": [
+                            0,
+                            1
+                        ]
+                    }
+                },
+                "required": [
+                    "Label",
+                    "Value",
+                    "OriginalValue",
+                    "LessIsGood"
+                ]
+            }
+        }
+    },
+    "required": [
+        "EngineerID",
+        "Engineer",
+        "BlueprintID",
+        "BlueprintName",
+        "Level",
+        "Quality",
+        "Modifications"
+    ]
+}

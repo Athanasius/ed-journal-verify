@@ -1,0 +1,7 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "_type_EngineerID",
+    "title": "Frontier Developers Elite Dangerous Journal EngineerID value",
+    "description": "An object describing a EngineerID value.",
+    "type":         "integer"
+}

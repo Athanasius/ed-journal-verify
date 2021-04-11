@@ -1,0 +1,12 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "_type_Modules",
+    "title": "Frontier Developers Elite Dangerous Journal Modules array schema",
+    "description": "An array of objects containing Modules.",
+    "type": "array",
+    "minItems":         1,
+    "uniqueItems":      true,
+    "contains": {
+        "$ref":         "file:_type_Module.json"
+    }
+}

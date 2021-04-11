@@ -1,0 +1,7 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "_type_BlueprintID",
+    "title": "Frontier Developers Elite Dangerous Journal BlueprintID value",
+    "description": "An object describing a BlueprintID value.",
+    "type":         "integer"
+}

@@ -1,0 +1,77 @@
+{
+    "$id":                      "Loadout",
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "timestamp": {
+            "type":             "string",
+            "format":           "date-time"
+        },
+        "event": {
+            "type":             "string",
+            "const":            "Loadout"
+        },
+        "Ship": {
+            "$ref":             "file:_type_Ship_Type.json"
+        },
+        "ShipID": {
+            "$ref":             "file:_type_ShipID.json"
+        },
+        "ShipName": {
+            "$ref":             "file:_type_Ship_Name.json"
+        },
+        "ShipIdent": {
+            "$ref":             "file:_type_Ship_Ident.json"
+        },
+        "HullValue": {
+            "$ref":             "file:_type_Credits.json"
+        },
+        "ModulesValue": {
+            "$ref":             "file:_type_Credits.json"
+        },
+        "HullHealth": {
+            "type":             "number",
+            "minimum":          0.0,
+            "maximum":          1.0
+        },
+        "UnladenMass": {
+            "type":             "number",
+            "minimum":          0.0
+        },
+        "FuelCapacity": {
+            "$ref":             "file:_type_FuelCapacity.json"
+        },
+        "CargoCapacity": {
+            "$ref":             "file:_type_CargoCapacity.json"
+        },
+        "MaxJumpRange": {
+            "$ref":             "file:_type_Jump_Range.json"
+        },
+        "Rebuy": {
+            "$ref":             "file:_type_Credits.json"
+        },
+        "Hot": {
+            "type":             "boolean"
+        },
+        "Modules": {
+            "$ref":             "file:_type_Modules.json"
+        }
+
+    },
+    "required": [
+        "timestamp",
+        "event",
+        "Ship",
+        "ShipID",
+        "ShipName",
+        "HullValue",
+        "ModulesValue",
+        "HullHealth",
+        "UnladenMass",
+        "FuelCapacity",
+        "CargoCapacity",
+        "MaxJumpRange",
+        "Rebuy",
+        "Modules"
+    ]
+}

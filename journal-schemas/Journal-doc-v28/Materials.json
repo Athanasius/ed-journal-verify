@@ -11,13 +11,13 @@
             "const":            "Materials"
         },
         "Raw": {
-            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Array_of_Name-Count.json"
+            "$ref":             "file:_type_Array_of_Name-Count.json"
         },
         "Manufactured": {
-            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Array_of_Name-Count.json"
+            "$ref":             "file:_type_Array_of_Name-Count.json"
         },
         "Encoded": {
-            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Array_of_Name-Count.json"
+            "$ref":             "file:_type_Array_of_Name-Count.json"
         }
     },
     "required": [

@@ -11,10 +11,10 @@
             "const":            "ClearSavedGame"
         },
         "Name": {
-            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Commander_Name.json"
+            "$ref":             "file:_type_Commander_Name.json"
         },
         "FID": {
-            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_FID.json"
+            "$ref":             "file:_type_FID.json"
         }
     },
     "required": [

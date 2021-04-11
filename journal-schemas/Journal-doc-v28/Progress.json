@@ -11,22 +11,22 @@
             "const":            "Progress"
         },
         "Combat": {
-            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Commander_Rank_Progress.json"
+            "$ref":             "file:_type_Commander_Rank_Progress.json"
         },
         "Trade": {
-            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Commander_Rank_Progress.json"
+            "$ref":             "file:_type_Commander_Rank_Progress.json"
         },
         "Explore": {
-            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Commander_Rank_Progress.json"
+            "$ref":             "file:_type_Commander_Rank_Progress.json"
         },
         "Empire": {
-            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Commander_Rank_Progress.json"
+            "$ref":             "file:_type_Commander_Rank_Progress.json"
         },
         "Federation": {
-            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Commander_Rank_Progress.json"
+            "$ref":             "file:_type_Commander_Rank_Progress.json"
         },
         "CQC": {
-            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Commander_Rank_Progress.json"
+            "$ref":             "file:_type_Commander_Rank_Progress.json"
         }
     },
     "required": [

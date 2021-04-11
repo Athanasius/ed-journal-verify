@@ -1,0 +1,8 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "_type_AmmoCount",
+    "title": "Frontier Developers Elite Dangerous Journal Ammo Count value",
+    "description": "An object describing a Ammo Count value.",
+    "type":         "integer",
+    "minimum":      0
+}

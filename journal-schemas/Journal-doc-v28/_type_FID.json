@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "_type_Commander_Name",
+    "$id": "_type_FID",
     "title": "Frontier Developers Elite Dangerous Journal FID",
     "description": "An object describing a FID.",
     "type":         "string",

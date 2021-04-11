@@ -25,7 +25,7 @@
             "type":             "array",
             "minItems":         0,
             "contains": {
-                "$ref":         "file:journal-schemas/Journal-doc-v28/_type_Inventory_Item.json"
+                "$ref":         "file:_type_Inventory_Item.json"
             }
         }
     },

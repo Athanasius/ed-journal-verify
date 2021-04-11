@@ -1,0 +1,51 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "_type_Module.json",
+    "title": "Frontier Developers Elite Dangerous Journal Module data.",
+    "description": "Data about a ship Module.",
+    "type":         "object",
+    "additionalProperties":     false,
+    "properties": {
+        "Slot": {
+            "type":             "string",
+            "minLength":        1
+        },
+        "Item": {
+            "type":             "string",
+            "minLength":        1
+        },
+        "On": {
+            "type":             "boolean"
+        },
+        "Priority": {
+            "type":             "integer",
+            "minimum":          1,
+            "maximum":          5
+        },
+        "Health": {
+            "type":             "number",
+            "minimum":          0.0,
+            "maximum":          1.0
+        },
+        "Value": {
+            "$ref":             "file:_type_Credits.json"
+        },
+        "AmmoInClip": {
+            "$ref":             "file:_type_AmmoCount.json"
+        },
+        "AmmoInHopper": {
+            "$ref":             "file:_type_AmmoCount.json"
+        },
+        "Engineering": {
+            "$ref":             "file:_type_Module_Engineering.json"
+        }
+    },
+    "required": [
+        "Slot",
+        "Item",
+        "On",
+        "Priority",
+        "Health",
+        "Value"
+    ]
+}

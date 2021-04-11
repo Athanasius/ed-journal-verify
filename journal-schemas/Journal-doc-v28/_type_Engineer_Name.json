@@ -1,0 +1,8 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "_type_Engineer_Name",
+    "title": "Frontier Developers Elite Dangerous Journal Engineer Name",
+    "description": "An object describing a Engineer's Name.",
+    "type":         "string",
+    "minLength":    1
+}

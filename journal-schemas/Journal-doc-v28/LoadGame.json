@@ -8,24 +8,22 @@
         },
         "event": {
             "type":             "string",
-            "const":            "Commander"
+            "const":            "LoadGame"
         },
         "Commander": {
-            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Commander_Name.json"
+            "$ref":             "file:_type_Commander_Name.json"
         },
         "FID": {
-            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_FID.json"
+            "$ref":             "file:_type_FID.json"
         },
         "Horizons": {
             "type":             "boolean"
         },
         "Ship": {
-            "type":             "string",
-            "minLength":        1
+            "$ref":             "file:_type_Ship_Type.json"
         },
         "ShipID": {
-            "type":             "integer",
-            "minimum":          0
+            "$ref":             "file:_type_ShipID.json"
         },
         "StartLanded": {
             "type":             "boolean"
@@ -54,12 +52,10 @@
             "minimum":          0
         },
         "ShipName": {
-            "type":             "string",
-            "minLength":        1
+            "$ref":             "file:_type_Ship_Name.json"
         },
         "ShipIdent": {
-            "type":             "string",
-            "minLength":        1
+            "$ref":             "file:_type_Ship_Ident.json"
         },
         "FuelLevel": {
             "type":             "number",

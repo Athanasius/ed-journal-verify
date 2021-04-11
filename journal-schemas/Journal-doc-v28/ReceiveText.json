@@ -11,7 +11,7 @@
             "const":            "EVENTNAME"
         },
         "From": {
-            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Commander_Name.json"
+            "$ref":             "file:_type_Commander_Name.json"
         },
         "Message": {
             "type":             "string",

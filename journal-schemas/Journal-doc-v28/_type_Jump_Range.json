@@ -1,0 +1,8 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "_type_Jump_Range",
+    "title": "Frontier Developers Elite Dangerous Journal Jump Range",
+    "description": "An object describing a Jump Range.",
+    "type":             "number",
+    "minimum":          0.0
+}

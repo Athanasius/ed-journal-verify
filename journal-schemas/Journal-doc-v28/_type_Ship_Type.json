@@ -1,0 +1,8 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "_type_Ship_Type",
+    "title": "Frontier Developers Elite Dangerous Journal Ship Type",
+    "description": "An object describing a Ship Type.",
+    "type":         "string",
+    "minLength":    1
+}

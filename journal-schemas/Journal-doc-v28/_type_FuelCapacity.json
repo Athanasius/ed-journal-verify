@@ -1,0 +1,19 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "_type_FuelCapacity",
+    "title": "Frontier Developers Elite Dangerous Journal FuelCapacity",
+    "description": "An object describing a FuelCapacity.",
+    "type":         "object",
+    "additionalProperties":     false,
+    "properties": {
+        "Main": {
+            "type":             "integer",
+            "minimum":          2,
+            "maximum":          128
+        },
+        "Reserve": {
+            "type":             "number",
+            "minimum":          0.0
+        }
+    }
+}

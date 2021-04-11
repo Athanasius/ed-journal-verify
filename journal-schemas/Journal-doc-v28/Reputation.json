@@ -11,16 +11,16 @@
             "const":            "Reputation"
         },
         "Empire": {
-            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Commander_Reputation.json"
+            "$ref":             "file:_type_Commander_Reputation.json"
         },
         "Federation": {
-            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Commander_Reputation.json"
+            "$ref":             "file:_type_Commander_Reputation.json"
         },
         "Independent": {
-            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Commander_Reputation.json"
+            "$ref":             "file:_type_Commander_Reputation.json"
         },
         "Alliance": {
-            "$ref":             "file:journal-schemas/Journal-doc-v28/_type_Commander_Reputation.json"
+            "$ref":             "file:_type_Commander_Reputation.json"
         }
     },
     "required": [

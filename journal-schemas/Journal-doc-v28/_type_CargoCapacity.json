@@ -1,0 +1,9 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "_type_CargoCapacity",
+    "title": "Frontier Developers Elite Dangerous Journal CargoCapacity",
+    "description": "An object describing a CargoCapacity.",
+    "type":             "integer",
+    "minimum":          0,
+    "maximum":          794
+}
