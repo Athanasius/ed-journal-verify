@@ -1,0 +1,43 @@
+{
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "timestamp": {
+            "type":             "string",
+            "format":           "date-time"
+        },
+        "event": {
+            "type":             "string",
+            "const":            "Powerplay"
+        },
+        "Power": {
+            "type":             "string",
+            "minLength":        1
+        },
+        "Rank": {
+            "type":             "integer",
+            "minimum":          0
+        },
+        "Merits": {
+            "type":             "integer",
+            "minimum":          0
+        },
+        "Votes": {
+            "type":             "integer",
+            "minimum":          0
+        },
+        "TimePledged": {
+            "type":             "integer",
+            "minimum":          0
+        }
+    },
+    "required": [
+        "timestamp",
+        "event",
+        "Power",
+        "Rank",
+        "Merits",
+        "Votes",
+        "TimePledged"
+    ]
+}
