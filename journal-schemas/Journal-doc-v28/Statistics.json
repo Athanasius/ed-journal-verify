@@ -1,0 +1,495 @@
+{
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "timestamp": {
+            "type":             "string",
+            "format":           "date-time"
+        },
+        "event": {
+            "type":             "string",
+            "const":            "Statistics"
+        },
+        "Bank_Account": {
+            "type":                     "object",
+            "additionalProperties":     false,
+            "properties": {
+                "Current_Wealth": {
+                    "type":             "integer"
+                },
+                "Spent_On_Ships": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Spent_On_Outfitting": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Spent_On_Repairs": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Spent_On_Fuel": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Spent_On_Ammo_Consumables": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Insurance_Claims": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Spent_On_Insurance": {
+                    "type":             "integer",
+                    "minimum":          0
+                }
+            },
+            "required": [
+                "Current_Wealth",
+                "Spent_On_Ships",
+                "Spent_On_Outfitting",
+                "Spent_On_Repairs",
+                "Spent_On_Fuel",
+                "Spent_On_Ammo_Consumables",
+                "Insurance_Claims",
+                "Spent_On_Insurance"
+            ]
+        },
+        "Combat": {
+            "type":                     "object",
+            "additionalProperties":     false,
+            "properties": {
+                "Bounties_Claimed": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Bounty_Hunting_Profit": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Combat_Bonds": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Combat_Bond_Profits": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Assassinations": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Assassination_Profits": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Highest_Single_Reward": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Skimmers_Killed": {
+                    "type":             "integer",
+                    "minimum":          0
+                }
+            },
+            "required": [
+                "Bounties_Claimed",
+                "Bounty_Hunting_Profit",
+                "Combat_Bonds",
+                "Combat_Bond_Profits",
+                "Assassinations",
+                "Assassination_Profits",
+                "Highest_Single_Reward",
+                "Skimmers_Killed"
+            ]
+        },
+        "Crime": {
+            "type":                     "object",
+            "additionalProperties":     false,
+            "properties": {
+                "Fines": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Total_Fines": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Bounties_Received": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Total_Bounties": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Highest_Bounty": {
+                    "type":             "integer",
+                    "minimum":          0
+                }
+            },
+            "required": [
+                "Fines",
+                "Total_Fines",
+                "Bounties_Received",
+                "Total_Bounties",
+                "Highest_Bounty"
+            ]
+        },
+        "Smuggling": {
+            "type":                     "object",
+            "additionalProperties":     false,
+            "properties": {
+                "Black_Markets_Traded_With": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Black_Markets_Profits": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Resources_Smuggled": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Average_Profit": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Highest_Single_Transaction": {
+                    "type":             "integer",
+                    "minimum":          0
+                }
+            },
+            "required": [
+                "Black_Markets_Traded_With",
+                "Black_Markets_Profits",
+                "Resources_Smuggled",
+                "Average_Profit",
+                "Highest_Single_Transaction"
+            ]
+        },
+        "Trading": {
+            "type":                     "object",
+            "additionalProperties":     false,
+            "properties": {
+                "Markets_Traded_With": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Market_Profits": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Resources_Traded": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Average_Profit": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Highest_Single_Transaction": {
+                    "type":             "integer",
+                    "minimum":          0
+                }
+            },
+            "required": [
+                "Markets_Traded_With",
+                "Market_Profits",
+                "Resources_Traded",
+                "Average_Profit",
+                "Highest_Single_Transaction"
+            ]
+        },
+        "Mining": {
+            "type":                     "object",
+            "additionalProperties":     false,
+            "properties": {
+                "Mining_Profits": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Quantity_Mined": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Materials_Collected": {
+                    "type":             "integer",
+                    "minimum":          0
+                }
+            },
+            "required": [
+                "Mining_Profits",
+                "Quantity_Mined",
+                "Materials_Collected"
+            ]
+        },
+        "Exploration": {
+            "type":                     "object",
+            "additionalProperties":     false,
+            "properties": {
+                "Systems_Visited": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Fuel_Scooped": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Fuel_Purchased": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Exploration_Profits": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Planets_Scanned_To_Level_2": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Planets_Scanned_To_Level_3": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Highest_Payout": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Total_Hyperspace_Distance": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Total_Hyperspace_Jumps": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Greatest_Distance_From_Start": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Time_Played": {
+                    "type":             "integer",
+                    "minimum":          0
+                }
+            },
+            "required": [
+                "Systems_Visited",
+                "Fuel_Scooped",
+                "Fuel_Purchased",
+                "Exploration_Profits",
+                "Planets_Scanned_To_Level_2",
+                "Planets_Scanned_To_Level_3",
+                "Highest_Payout",
+                "Total_Hyperspace_Distance",
+                "Total_Hyperspace_Jumps",
+                "Greatest_Distance_From_Start",
+                "Time_Played"
+            ]
+        },
+        "Passengers": {
+            "type":                     "object",
+            "additionalProperties":     false,
+            "properties": {
+                "Passengers_Missions_Bulk": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Passengers_Missions_VIP": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Passengers_Missions_Delivered": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Passengers_Missions_Ejected": {
+                    "type":             "integer",
+                    "minimum":          0
+                }
+            },
+            "required": [
+                "Passengers_Missions_Bulk",
+                "Passengers_Missions_VIP",
+                "Passengers_Missions_Delivered",
+                "Passengers_Missions_Ejected"
+            ]
+        },
+        "Search_And_Rescue": {
+            "type":                     "object",
+            "additionalProperties":     false,
+            "properties": {
+                "SearchRescue_Traded": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "SearchRescue_Profit": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "SearchRescue_Count": {
+                    "type":             "integer",
+                    "minimum":          0
+                }
+            },
+            "required": [
+                "SearchRescue_Traded",
+                "SearchRescue_Profit",
+                "SearchRescue_Count"
+            ]
+        },
+        "Crafting": {
+            "type":                     "object",
+            "additionalProperties":     false,
+            "properties": {
+                "Spent_On_Crafting": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Count_Of_Used_Engineers": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Recipes_Generated": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Recipes_Generated_Rank_1": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Recipes_Generated_Rank_2": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Recipes_Generated_Rank_3": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Recipes_Generated_Rank_4": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Recipes_Generated_Rank_5": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Recipes_Applied": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Recipes_Applied_Rank_1": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Recipes_Applied_Rank_2": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Recipes_Applied_Rank_3": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Recipes_Applied_Rank_4": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Recipes_Applied_Rank_5": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "Recipes_Applied_On_Previously_Modified_Modules": {
+                    "type":             "integer",
+                    "minimum":          0
+                }
+            },
+            "required": [
+                "Spent_On_Crafting",
+                "Count_Of_Used_Engineers",
+                "Recipes_Generated",
+                "Recipes_Generated_Rank_1",
+                "Recipes_Generated_Rank_2",
+                "Recipes_Generated_Rank_3",
+                "Recipes_Generated_Rank_4",
+                "Recipes_Generated_Rank_5",
+                "Recipes_Applied",
+                "Recipes_Applied_Rank_1",
+                "Recipes_Applied_Rank_2",
+                "Recipes_Applied_Rank_3",
+                "Recipes_Applied_Rank_4",
+                "Recipes_Applied_Rank_5",
+                "Recipes_Applied_On_Previously_Modified_Modules"
+            ]
+        },
+        "Crew": {
+            "type":                     "object",
+            "additionalProperties":     false,
+            "properties": {
+                "NpcCrew_TotalWages": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "NpcCrew_Hired": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "NpcCrew_Fired": {
+                    "type":             "integer",
+                    "minimum":          0
+                },
+                "NpcCrew_Died": {
+                    "type":             "integer",
+                    "minimum":          0
+                }
+            },
+            "required": [
+                "NpcCrew_TotalWages",
+                "NpcCrew_Hired",
+                "NpcCrew_Fired",
+                "NpcCrew_Died"
+            ]
+        },
+        "Multicrew": {
+            "type":                     "object",
+            "additionalProperties":     false,
+            "properties": {
+                "Multicrew_Time_Total": {
+                },
+                "Multicrew_Gunner_Time_Total": {
+                },
+                "Multicrew_Fighter_Time_Total": {
+                },
+                "Multicrew_Credits_Total": {
+                },
+                "Multicrew_Fines_Total": {
+                }
+            },
+            "required": [
+                "Multicrew_Time_Total",
+                "Multicrew_Gunner_Time_Total",
+                "Multicrew_Fighter_Time_Total",
+                "Multicrew_Credits_Total",
+                "Multicrew_Fines_Total"
+            ]
+        }
+    },
+    "required": [
+        "timestamp",
+        "event",
+        "Bank_Account",
+        "Combat",
+        "Crime",
+        "Smuggling",
+        "Trading",
+        "Mining",
+        "Exploration",
+        "Passengers",
+        "Search_And_Rescue",
+        "Crafting",
+        "Crew",
+        "Multicrew"
+    ]
+}
