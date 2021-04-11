@@ -1,0 +1,38 @@
+{
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "timestamp": {
+            "type":             "string",
+            "format":           "date-time"
+        },
+        "event": {
+            "type":             "string",
+            "const":            "Cargo"
+        },
+        "Vessel": {
+            "type":             "string",
+            "enum": [
+                "Ship",
+                "SRV"
+            ]
+        },
+        "Count": {
+            "type":             "integer",
+            "minimum":          0
+        },
+        "Inventory": {
+            "type":             "array",
+            "minItems":         0,
+            "contains": {
+                "$ref":         "file:journal-schemas/Journal-doc-v28/_type_Inventory_Item.json"
+            }
+        }
+    },
+    "required": [
+        "timestamp",
+        "event",
+        "Vessel",
+        "Count"
+    ]
+}
