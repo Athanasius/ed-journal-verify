@@ -207,9 +207,21 @@ class JournalSchemaCheck:
             # Load schema
             if self.schemas.get('event') is None:
                 try:
-                    with (pathlib.Path(sys.path[0]) / self.schemas_dir / f'{entry["event"]}.json').open('r') as s:
+                    schema_file_path = pathlib.Path(sys.path[0]) / self.schemas_dir
+                    schema_file_name = schema_file_path / f'{entry["event"]}.json'
+                    with schema_file_name.open('r') as s:
                         try:
-                            self.schemas[event] = json.load(s)
+                            # <https://stackoverflow.com/a/53968771>
+                            schema_json = json.load(s)
+                            # NB: We need .as_uri() here so it's always forwards slashes, due to how
+                            #     the called-into functions expect '/' not '\' in tests.
+                            resolver = jsonschema.RefResolver(
+                                base_uri=f'file:{schema_file_path.as_uri()}',
+                                referrer=schema_json
+                            )
+                            jsonschema.Draft7Validator.check_schema(schema_json)
+                            self.schemas[event] = jsonschema.Draft7Validator(schema_json, resolver=resolver,
+                                                                             format_checker=None)
 
                         except json.decoder.JSONDecodeError as e:
                             self.logger.error(f"Error loading schema file for event '{event}':\n{e!r}")
@@ -222,10 +234,11 @@ class JournalSchemaCheck:
 
             # Validate
             try:
-                jsonschema.validate(entry, self.schemas[event])
+                self.schemas[event].validate(entry)
 
             except jsonschema.ValidationError as e:
-                self.logger.error(f'The following entry in file "{file}" failed validation:\n{e}\n{entry}')
+                self.logger.error(f'The following entry in file "{file}" failed validation:\n{e}\n'
+                                  f'---\n{entry}\n---\n\n')
 
             except jsonschema.SchemaError as e:
                 self.logger.error(f'The following entry in file "{file}" has a schema error:\n{e}\n{entry}')
