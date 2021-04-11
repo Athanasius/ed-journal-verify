@@ -1,0 +1,17 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "_type_Faction_State",
+    "title": "Frontier Developers Elite Dangerous Journal Faction State.",
+    "description": "An object describing a Faction State.",
+    "type":         "object",
+    "additionalProperties":     false,
+    "properties": {
+        "State": {
+            "type":             "string",
+            "minLength":        1
+        }
+    },
+    "required": [
+        "State"
+    ]
+}

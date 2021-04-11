@@ -1,0 +1,17 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "_type_PowerplayState",
+    "title": "Frontier Developers Elite Dangerous Journal PowerplayState",
+    "description": "A system's Powerplay State.",
+    "type":                     "string",
+    "minLength":                1,
+    "enum": [
+        "InPrepareRadius",
+        "Prepared",
+        "Exploited",
+        "Contested",
+        "Controlled",
+        "Turmoil",
+        "HomeSystem"
+    ]
+}

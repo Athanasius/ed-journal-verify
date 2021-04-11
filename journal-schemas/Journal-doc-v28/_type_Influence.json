@@ -1,0 +1,9 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "_type_Influence",
+    "title": "Frontier Developers Elite Dangerous Journal Influence",
+    "description": "An object describing a Influence.",
+    "type":         "number",
+    "minimum":      0.0,
+    "maximum":      1.0
+}

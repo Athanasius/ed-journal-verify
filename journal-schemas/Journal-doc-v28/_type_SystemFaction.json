@@ -1,0 +1,20 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "_type_SystemFaction",
+    "title": "Frontier Developers Elite Dangerous Journal SystemFaction",
+    "description": "An object describing a SystemFaction.",
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "Name": {
+            "$ref":             "file:_type_FactionName.json"
+        },
+        "FactionState": {
+            "$ref":             "file:_type_FactionState.json"
+        }
+    },
+    "required": [
+        "Name",
+        "FactionState"
+    ]
+}

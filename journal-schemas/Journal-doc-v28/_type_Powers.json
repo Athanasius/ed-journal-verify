@@ -1,0 +1,12 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "_type_Powers",
+    "title": "Frontier Developers Elite Dangerous Journal Powers",
+    "description": "An array of objects containing Powers details.                    *************** This might be an array sometimes, or only a string ***********************",
+    "type":                         "array",
+    "minItems":                     1,
+    "items": {
+        "type":                     "string",
+        "minLength":                1
+    }
+}

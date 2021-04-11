@@ -1,8 +1,0 @@
-{
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "_type_StationGovernment_Localised",
-    "title": "Frontier Developers Elite Dangerous Journal StationGovernment (Localised)",
-    "description": "An object describing a StationGovernment (Localised).",
-    "type":         "string",
-    "minLength":    1
-}

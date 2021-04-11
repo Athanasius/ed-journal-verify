@@ -44,10 +44,10 @@
             "$ref":             "file:_type_Array_Economies.json"
         },
         "StationGovernment": {
-            "$ref":             "file:_type_StationGovernment.json"
+            "$ref":             "file:_type_Government.json"
         },
         "StationGovernment_Localised": {
-            "$ref":             "file:_type_StationGovernment_Localised.json"
+            "$ref":             "file:_type_Government_Localised.json"
         },
         "DistFromStarLS": {
             "$ref":             "file:_type_DistanceLS.json"

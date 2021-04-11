@@ -1,0 +1,110 @@
+{
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "timestamp": {
+            "type":             "string",
+            "format":           "date-time"
+        },
+        "event": {
+            "type":             "string",
+            "const":            "FSDJump"
+        },
+        "StarSystem": {
+            "$ref":             "file:_type_SystemName.json"
+        },
+        "SystemAddress": {
+            "$ref":             "file:_type_SystemAddress.json"
+        },
+        "StarPos": {
+            "$ref":             "file:_type_StarPos.json"
+        },
+        "Body": {
+            "$ref":             "file:_type_Body.json"
+        },
+        "JumpDist": {
+            "type":             "number",
+            "minimum":          0.0
+        },
+        "FuelUsed": {
+            "type":             "number"
+        },
+        "FuelLevel": {
+            "type":             "number"
+        },
+        "BoostUsed": {
+            "type":             "boolean"
+        },
+        "SystemFaction": {
+            "$ref":             "file:_type_SystemFaction.json"
+        },
+        "SystemAllegiance": {
+            "$ref":             "file:_type_Allegiance.json"
+        },
+        "SystemEconomy": {
+            "$ref":             "file:_type_Economy.json"
+        },
+        "SystemEconomy_Localised": {
+            "$ref":             "file:_type_Economy_Localised.json"
+        },
+        "SystemSecondEconomy": {
+            "$ref":             "file:_type_Economy.json"
+        },
+        "SystemSecondEconomy_Localised": {
+            "$ref":             "file:_type_Economy_Localised.json"
+        },
+        "SystemGovernment": {
+            "$ref":             "file:_type_Government.json"
+        },
+        "SystemGovernment_Localised": {
+            "$ref":             "file:_type_Government_Localised.json"
+        },
+        "SystemSecurity": {
+            "$ref":             "file:_type_Security.json"
+        },
+        "SystemSecurity_Localised": {
+            "$ref":             "file:_type_Security_Localised.json"
+        },
+        "Population": {
+            "$ref":             "file:_type_Population.json"
+        },
+        "Wanted": {
+            "type":             "boolean"
+        },
+        "Factions": {
+            "$ref":             "file:_type_Array_Factions.json"
+        },
+        "Conflicts": {
+            "$ref":             "file:_type_Array_Conflicts.json"
+        },
+        "Powers": {
+            "$ref":             "file:_type_Powers.json"
+        },
+        "PowerplayState": {
+            "$ref":             "file:_type_PowerplayState.json"
+        }
+
+    },
+    "required": [
+        "timestamp",
+        "event",
+        "StarSystem",
+        "SystemAddress",
+        "StarPos",
+        "Body",
+        "JumpDist",
+        "FuelUsed",
+        "FuelLevel",
+        "SystemFaction",
+        "SystemAllegiance",
+        "SystemEconomy",
+        "SystemEconomy_Localised",
+        "SystemSecondEconomy",
+        "SystemSecondEconomy_Localised",
+        "SystemGovernment",
+        "SystemGovernment_Localised",
+        "SystemSecurity",
+        "SystemSecurity_Localised",
+        "Population"
+    ]
+}
