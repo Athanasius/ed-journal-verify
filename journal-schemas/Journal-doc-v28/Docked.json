@@ -1,0 +1,86 @@
+{
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "timestamp": {
+            "type":             "string",
+            "format":           "date-time"
+        },
+        "event": {
+            "type":             "string",
+            "const":            "Docked"
+        },
+        "StationName": {
+            "$ref":             "file:_type_StationName.json"
+        },
+        "MarketID": {
+            "$ref":             "file:_type_MarketID.json"
+        },
+        "SystemAddress": {
+            "$ref":             "file:_type_SystemAddress.json"
+        },
+        "StationType": {
+            "$ref":             "file:_type_StationType.json"
+        },
+        "StarSystem": {
+            "$ref":             "file:_type_SystemName.json"
+        },
+        "CockpitBreach": {
+            "type":             "boolean"
+        },
+        "StationFaction": {
+            "$ref":             "file:_type_StationFaction.json"
+        },
+        "StationAllegiance": {
+            "$ref":             "file:_type_Allegiance.json"
+        },
+        "StationEconomy": {
+            "$ref":             "file:_type_Economy.json"
+        },
+        "StationEconomy_Localised": {
+            "$ref":             "file:_type_Economy_Localised.json"
+        },
+        "StationEconomies": {
+            "$ref":             "file:_type_Array_Economies.json"
+        },
+        "StationGovernment": {
+            "$ref":             "file:_type_StationGovernment.json"
+        },
+        "StationGovernment_Localised": {
+            "$ref":             "file:_type_StationGovernment_Localised.json"
+        },
+        "DistFromStarLS": {
+            "$ref":             "file:_type_DistanceLS.json"
+        },
+        "StationServices": {
+            "type":             "array",
+            "items": {
+                "type":         "string"
+            }
+        },
+        "Wanted": {
+            "type":             "boolean"
+        },
+        "ActiveFine": {
+            "type":             "boolean"
+        }
+    },
+    "required": [
+        "timestamp",
+        "event",
+        "StationName",
+        "MarketID",
+        "SystemAddress",
+        "StationType",
+        "StarSystem",
+        "StationFaction",
+        "StationAllegiance",
+        "StationEconomy",
+        "StationEconomy_Localised",
+        "StationEconomies",
+        "StationGovernment",
+        "StationGovernment_Localised",
+        "DistFromStarLS",
+        "StationServices"
+    ]
+}

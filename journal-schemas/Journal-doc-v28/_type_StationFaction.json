@@ -1,0 +1,17 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "_type_StationFaction",
+    "title": "Frontier Developers Elite Dangerous Journal StationFaction",
+    "description": "An object describing a StationFaction.",
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "Name": {
+            "type":             "string",
+            "minLength":        1
+        }
+    },
+    "required": [
+        "Name"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "_type_MarketID",
+    "title": "Frontier Developers Elite Dangerous Journal MarketID",
+    "description": "An object describing a MarketID.",
+    "type":         "integer",
+    "minLength":    0
+}

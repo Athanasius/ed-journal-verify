@@ -1,0 +1,8 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "_type_Economy_Localised",
+    "title": "Frontier Developers Elite Dangerous Journal Economy_Localised",
+    "description": "An object describing a Economy_Localised.",
+    "type":         "string",
+    "minLength":    1
+}
