@@ -26,8 +26,9 @@
     },
     "required": [
         "MissionID",
-        "Name",
-        "PassengerMission",
-        "Expires"
+        "Type",
+        "VIP",
+        "Wanted",
+        "Count"
     ]
 }

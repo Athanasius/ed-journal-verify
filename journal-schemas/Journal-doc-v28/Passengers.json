@@ -20,6 +20,6 @@
     "required": [
         "timestamp",
         "event",
-        "Passengers"
+        "Manifest"
     ]
 }
