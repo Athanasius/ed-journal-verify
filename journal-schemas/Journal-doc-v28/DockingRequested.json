@@ -1,0 +1,30 @@
+{
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "timestamp": {
+            "type":             "string",
+            "format":           "date-time"
+        },
+        "event": {
+            "type":             "string",
+            "const":            "DockingRequested"
+        },
+        "StationName": {
+            "$ref":             "file:_type_StationName.json"
+        },
+        "StationType": {
+            "$ref":             "file:_type_StationType.json"
+        },
+        "MarketID": {
+            "$ref":             "file:_type_MarketID.json"
+        }
+    },
+    "required": [
+        "timestamp",
+        "event",
+        "StationName",
+        "StationType",
+        "MarketID"
+    ]
+}
