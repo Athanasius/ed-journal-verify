@@ -1,0 +1,30 @@
+{
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "timestamp": {
+            "type":             "string",
+            "format":           "date-time"
+        },
+        "event": {
+            "type":             "string",
+            "const":            "Missions"
+        },
+        "Active": {
+            "$ref":             "file:_type_Array_Missions.json"
+        },
+        "Failed": {
+            "$ref":             "file:_type_Array_Missions.json"
+        },
+        "Complete": {
+            "$ref":             "file:_type_Array_Missions.json"
+        }
+    },
+    "required": [
+        "timestamp",
+        "event",
+        "Active",
+        "Failed",
+        "Complete"
+    ]
+}
