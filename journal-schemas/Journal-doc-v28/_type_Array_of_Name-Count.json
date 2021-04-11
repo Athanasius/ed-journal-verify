@@ -6,7 +6,7 @@
     "type": "array",
     "minItems":         1,
     "uniqueItems":      true,
-    "contains": {
+    "items": {
         "type":         "object",
         "additionalProperties":     false,
         "properties": {

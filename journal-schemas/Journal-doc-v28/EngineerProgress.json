@@ -13,7 +13,7 @@
         "Engineers": {
             "type":             "array",
             "uniqyeItems":      true,
-            "contains": {
+            "items": {
                 "type":                     "object",
                 "additionalProperties":     false,
                 "properties": {

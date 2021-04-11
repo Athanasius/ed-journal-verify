@@ -24,7 +24,7 @@
         "Inventory": {
             "type":             "array",
             "minItems":         0,
-            "contains": {
+            "items": {
                 "$ref":         "file:_type_Inventory_Item.json"
             }
         }

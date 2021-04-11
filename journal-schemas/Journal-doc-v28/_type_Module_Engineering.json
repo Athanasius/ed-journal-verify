@@ -31,7 +31,7 @@
         },
         "Modifications": {
             "type":             "array",
-            "contains": {
+            "items": {
                 "type":                     "object",
                 "additionalProperties":     false,
                 "properties": {
