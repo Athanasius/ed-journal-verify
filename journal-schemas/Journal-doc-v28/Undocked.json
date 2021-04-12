@@ -1,0 +1,26 @@
+{
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "timestamp": {
+            "type":             "string",
+            "format":           "date-time"
+        },
+        "event": {
+            "type":             "string",
+            "const":            "Undocked"
+        },
+        "StationName": {
+            "$ref":             "file:_type_StationName.json"
+        },
+        "MarketID": {
+            "$ref":             "file:_type_MarketID.json"
+        }
+    },
+    "required": [
+        "timestamp",
+        "event",
+        "StationName",
+        "MarketID"
+    ]
+}
