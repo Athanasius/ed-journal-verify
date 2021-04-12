@@ -1,0 +1,35 @@
+{
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "timestamp": {
+            "type":             "string",
+            "format":           "date-time"
+        },
+        "event": {
+            "type":             "string",
+            "const":            "StartJump"
+        },
+        "JumpType": {
+            "type":             "string",
+            "enum": [
+                "Hyperspace",
+                "Supercruise"
+            ]
+        },
+        "StarSystem": {
+            "$ref":             "file:_type_SystemName.json"
+        },
+        "SystemAddress": {
+            "$ref":             "file:_type_SystemAddress.json"
+        },
+        "StarClass": {
+            "$ref":             "file:_type_StarClass.json"
+        }
+    },
+    "required": [
+        "timestamp",
+        "event",
+        "JumpType"
+    ]
+}
