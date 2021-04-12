@@ -1,0 +1,59 @@
+{
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "timestamp": {
+            "type":             "string",
+            "format":           "date-time"
+        },
+        "event": {
+            "type":             "string",
+            "const":            "Bounty"
+        },
+        "Rewards": {
+            "type":             "array",
+            "minItems":         1,
+            "items": {
+                "type":                     "object",
+                "additionalProperties":     false,
+                "properties": {
+                    "Faction": {
+                        "$ref":             "file:_type_FactionName.json"
+                    },
+                    "Reward": {
+                        "$ref":             "file:_type_Credits.json"
+                    }
+                },
+                "required": [
+                    "Faction",
+                    "Reward"
+                ]
+            }
+        },
+        "Target": {
+            "type":             "string",
+            "minLength":        1
+        },
+        "VictimFaction": {
+            "$ref":             "file:_type_FactionName.json"
+        },
+        "TotalReward": {
+            "$ref":             "file:_type_Credits.json"
+        },
+        "SharedWithOthers": {
+            "type":             "integer",
+            "minimum":          1
+        },
+        "Faction": {
+            "$ref":             "file:_type_FactionName.json"
+        }
+    },
+    "required": [
+        "timestamp",
+        "event",
+        "Rewards",
+        "Target",
+        "VictimFaction",
+        "TotalReward"
+    ]
+}
