@@ -1,0 +1,30 @@
+{
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "timestamp": {
+            "type":             "string",
+            "format":           "date-time"
+        },
+        "event": {
+            "type":             "string",
+            "const":            "CapShipBond"
+        },
+        "Reward": {
+            "$ref":             "file:_type_Credits.json"
+        },
+        "AwardingFaction": {
+            "$ref":             "file:_type_FactionName.json"
+        },
+        "VictimFaction": {
+            "$ref":             "file:_type_FactionName.json"
+        }
+    },
+    "required": [
+        "timestamp",
+        "event",
+        "Reward",
+        "AwardingFaction",
+        "VictimFaction"
+    ]
+}
