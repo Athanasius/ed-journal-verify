@@ -1,0 +1,36 @@
+{
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "timestamp": {
+            "type":             "string",
+            "format":           "date-time"
+        },
+        "event": {
+            "type":             "string",
+            "const":            "Died"
+        },
+        "KillerName": {
+            "type":             "string",
+            "minLength":        1
+        },
+        "KillerName_Localised": {
+            "type":             "string",
+            "minLength":        1
+        },
+        "KillerShip": {
+            "$ref":             "file:_type_Ship_Type.json"
+        },
+        "KillerRank": {
+            "$ref":             "file:_type_Combat_Rank.json"
+        }
+    },
+    "required": [
+        "timestamp",
+        "event",
+        "KillerName",
+        "KillerName_Localised",
+        "KillerShip",
+        "KillerRank"
+    ]
+}
