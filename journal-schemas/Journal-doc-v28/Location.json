@@ -1,0 +1,143 @@
+{
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "timestamp": {
+            "type":             "string",
+            "format":           "date-time"
+        },
+        "event": {
+            "type":             "string",
+            "const":            "Location"
+        },
+        "StarSystem": {
+            "$ref":             "file:_type_SystemName.json"
+        },
+        "SystemAddress": {
+            "$ref":             "file:_type_SystemAddress.json"
+        },
+        "StarPos": {
+            "$ref":             "file:_type_StarPos.json"
+        },
+        "Body": {
+            "$ref":             "file:_type_Body.json"
+        },
+        "BodyID": {
+            "$ref":             "file:_type_BodyID.json"
+        },
+        "BodyType": {
+            "$ref":             "file:_type_BodyType.json"
+        },
+        "DistFromStarLS": {
+            "$ref":             "file:_type_DistanceLS.json"
+        },
+        "Docked": {
+            "type":             "boolean"
+        },
+        "Latitude": {
+            "$ref":             "file:_type_Latitude.json"
+        },
+        "Longitude": {
+            "$ref":             "file:_type_Longitude.json"
+        },
+        "StationName": {
+            "$ref":             "file:_type_StationName.json"
+        },
+        "StationType": {
+            "$ref":             "file:_type_StationType.json"
+        },
+        "MarketID": {
+            "$ref":             "file:_type_MarketID.json"
+        },
+        "SystemFaction": {
+            "$ref":             "file:_type_SystemFaction.json"
+        },
+        "SystemAllegiance": {
+            "$ref":             "file:_type_Allegiance.json"
+        },
+        "SystemEconomy": {
+            "$ref":             "file:_type_Economy.json"
+        },
+        "SystemEconomy_Localised": {
+            "$ref":             "file:_type_Economy_Localised.json"
+        },
+        "SystemSecondEconomy": {
+            "$ref":             "file:_type_Economy.json"
+        },
+        "SystemSecondEconomy_Localised": {
+            "$ref":             "file:_type_Economy_Localised.json"
+        },
+        "SystemGovernment": {
+            "$ref":             "file:_type_Government.json"
+        },
+        "SystemGovernment_Localised": {
+            "$ref":             "file:_type_Government_Localised.json"
+        },
+        "SystemSecurity": {
+            "$ref":             "file:_type_Security.json"
+        },
+        "SystemSecurity_Localised": {
+            "$ref":             "file:_type_Security_Localised.json"
+        },
+        "Wanted": {
+            "type":             "boolean"
+        },
+        "Factions": {
+            "$ref":             "file:_type_Array_Factions.json"
+        },
+        "Conflicts": {
+            "$ref":             "file:_type_Array_Conflicts.json"
+        },
+        "Powers": {
+            "$ref":             "file:_type_Powers.json"
+        },
+        "PowerplayState": {
+            "$ref":             "file:_type_PowerplayState.json"
+        },
+        "StationFaction": {
+            "$ref":             "file:_type_StationFaction.json"
+        },
+        "StationGovernment": {
+            "$ref":             "file:_type_Government.json"
+        },
+        "StationGovernment_Localised": {
+            "$ref":             "file:_type_Government_Localised.json"
+        },
+        "StationAllegiance": {
+            "$ref":             "file:_type_Allegiance.json"
+        },
+        "StationServices": {
+            "type":             "array",
+            "items": {
+                "type":         "string"
+            }
+        },
+        "StationEconomies": {
+            "$ref":             "file:_type_Array_Economies.json"
+        }
+
+
+    },
+    "required": [
+        "timestamp",
+        "event",
+        "StarSystem",
+        "SystemAddress",
+        "StarPos",
+        "Body",
+        "BodyID",
+        "BodyType",
+        "DistFromStarLS",
+        "Docked",
+        "SystemFaction",
+        "SystemAllegiance",
+        "SystemEconomy",
+        "SystemEconomy_Localised",
+        "SystemSecondEconomy",
+        "SystemSecondEconomy_Localised",
+        "SystemGovernment",
+        "SystemGovernment_Localised",
+        "SystemSecurity",
+        "SystemSecurity_Localised"
+    ]
+}
