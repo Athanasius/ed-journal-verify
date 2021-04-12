@@ -1,0 +1,22 @@
+{
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "timestamp": {
+            "type":             "string",
+            "format":           "date-time"
+        },
+        "event": {
+            "type":             "string",
+            "const":            "SupercruiseEntry"
+        },
+        "Starsystem": {
+            "$ref":             "file:_type_SystemName.json"
+        }
+    },
+    "required": [
+        "timestamp",
+        "event",
+        "Starsystem"
+    ]
+}
