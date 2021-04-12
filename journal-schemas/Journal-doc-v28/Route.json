@@ -1,0 +1,18 @@
+{
+    "type":                     "object",
+    "additionalProperties":     false,
+    "properties": {
+        "timestamp": {
+            "type":             "string",
+            "format":           "date-time"
+        },
+        "event": {
+            "type":             "string",
+            "const":            "Route"
+        }
+    },
+    "required": [
+        "timestamp",
+        "event"
+    ]
+}
